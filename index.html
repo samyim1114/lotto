@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>六合彩科學模擬器 (支援膽拖/複式) | EV 期望值分析</title>
+    <title>六合彩模擬器 (支援膽拖/複式) | EV 期望值分析</title>
     <meta name="description" content="支援六合彩膽拖及複式投注模擬。透過大數據分析期望值 (EV)，即時顯示開獎號碼與中獎注數。">
     
 
@@ -16,18 +16,17 @@
         
         .ball-container { 
     display: flex; 
-    gap: 5px; /* 縮小球與球之間的間距 */
+    gap: 4px; /* 從 5px 縮小為 4px */
     justify-content: center; 
-    padding: 15px 5px; 
+    padding: 12px 5px; /* 稍微縮小上下 padding */
     background: #262626; 
     border-radius: 10px; 
     margin-bottom: 20px; 
-    overflow-x: auto; /* 若螢幕太窄允許橫向滑動而不變形 */
 }
         .ball { 
-    width: 40px; 
-    height: 40px; 
-    line-height: 36px; /* 扣除 border 厚度使文字垂直居中 */
+    width: 32px; /* 從 40px 縮小為 32px */
+    height: 32px; 
+    line-height: 28px; /* 扣除 border 厚度使文字垂直居中 */
     background: #444; 
     color: #fff; 
     border-radius: 50%; 
@@ -35,11 +34,12 @@
     align-items: center; 
     justify-content: center; 
     font-weight: bold; 
-    font-size: 18px; 
+    font-size: 14px; /* 文字隨之縮小 */
     border: 2px solid #555; 
-    flex-shrink: 0; /* 防止在窄螢幕被擠壓成橢圓 */
-    aspect-ratio: 1 / 1; /* 強制寬高 1:1 */
+    flex-shrink: 0; /* 防止擠壓變形 */
+    aspect-ratio: 1 / 1; /* 強制正圓 */
     box-sizing: border-box; 
+    transition: background 0.2s; /* 增加變色平滑度 */
 }
         .ball.active { background: #ffeb3b; color: #333; border-color: #fff; box-shadow: 0 0 10px rgba(255,235,59,0.5); }
         .ball.special { background: var(--special); border-color: #ffcdd2; }
