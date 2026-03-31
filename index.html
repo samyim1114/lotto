@@ -6,16 +6,7 @@
     <title>六合彩科學模擬器 (支援膽拖/複式) | EV 期望值分析</title>
     <meta name="description" content="支援六合彩膽拖及複式投注模擬。透過大數據分析期望值 (EV)，即時顯示開獎號碼與中獎注數。">
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3384901403732688"
-     crossorigin="anonymous"></script>
 
     <style>
         :root { --primary: #4caf50; --bg: #121212; --card: #1e1e1e; --loss: #ff5252; --win: #00e676; --special: #f44336; --banker: #2196f3; --leg: #ff9800; --gold: #ffd700; }
@@ -23,8 +14,33 @@
         .container { background: var(--card); padding: 25px; border-radius: 15px; width: 100%; max-width: 1000px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .ad-space { background: #262626; border: 1px dashed #444; margin: 15px 0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; min-height: 90px; border-radius: 8px; }
         
-        .ball-container { display: flex; gap: 10px; justify-content: center; padding: 15px; background: #262626; border-radius: 10px; margin-bottom: 20px; }
-        .ball { width: 40px; height: 40px; background: #444; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; border: 2px solid #555; }
+        .ball-container { 
+    display: flex; 
+    gap: 5px; /* 縮小球與球之間的間距 */
+    justify-content: center; 
+    padding: 15px 5px; 
+    background: #262626; 
+    border-radius: 10px; 
+    margin-bottom: 20px; 
+    overflow-x: auto; /* 若螢幕太窄允許橫向滑動而不變形 */
+}
+        .ball { 
+    width: 40px; 
+    height: 40px; 
+    line-height: 36px; /* 扣除 border 厚度使文字垂直居中 */
+    background: #444; 
+    color: #fff; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+    font-size: 18px; 
+    border: 2px solid #555; 
+    flex-shrink: 0; /* 防止在窄螢幕被擠壓成橢圓 */
+    aspect-ratio: 1 / 1; /* 強制寬高 1:1 */
+    box-sizing: border-box; 
+}
         .ball.active { background: #ffeb3b; color: #333; border-color: #fff; box-shadow: 0 0 10px rgba(255,235,59,0.5); }
         .ball.special { background: var(--special); border-color: #ffcdd2; }
 
@@ -66,7 +82,7 @@
 <div class="container">
 
 
-    <h1>香港六合彩科學模擬器</h1>
+    <h1>香港六合彩模擬器</h1>
 
     <div class="card" style="border-top-color: #ff9800; margin-bottom: 20px;">
         <h3 style="margin:0 0 10px 0">最新開獎</h3>
@@ -90,7 +106,7 @@
 
     <div class="controls">
         <button class="btn-start" id="runBtn" onclick="toggleSim(false)">開始極速模擬</button>
-        
+        <button onclick="drawOnce()" style="background:#ff9800; color:white;">手動開獎</button>
         <div style="border-left: 2px solid #444; padding-left: 10px; display: flex; gap: 8px; align-items: center;">
             <span style="font-size: 14px;">直到中：</span>
             <select id="targetPrize">
@@ -105,7 +121,7 @@
             <button class="btn-target" id="targetBtn" onclick="toggleSim(true)">開始尋夢</button>
         </div>
 
-        <button onclick="drawOnce()" style="background:#ff9800; color:white;">手動開獎</button>
+        
         <button onclick="resetAll()" style="background:#666; color:white;">重置</button>
         <span id="status">系統就緒</span>
     </div>
